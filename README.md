@@ -1,1 +1,1 @@
-# spring-amqp-tutorial
+# Spring Tutorial
