@@ -1,0 +1,53 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+interface AnnotatedTypeMetadata << interface >>
+interface AnnotationMetadata << interface >>
+interface BeanFactoryPostProcessor << interface >>
+class CachingMetadataReaderFactory
+class CachingMetadataReaderFactoryPostProcessor
+interface ClassMetadata << interface >>
+class ClassPathContextResource
+interface ConfigurableApplicationContext << interface >>
+class ConfigurationClassPostProcessorCustomizingSupplier
+class DefaultResourceLoader
+class LocalResourceCache
+interface MetadataReader << interface >>
+interface MetadataReaderFactory << interface >>
+interface PriorityOrdered << interface >>
+interface ResourceLoader << interface >>
+class SharedMetadataReaderFactoryBean
+class SharedMetadataReaderFactoryContextInitializer
+class SimpleMetadataReaderFactory
+class StandardAnnotationMetadata
+class StandardClassMetadata
+
+AnnotationMetadata                                  -[#008200,plain]-^  AnnotatedTypeMetadata                              
+AnnotationMetadata                                  -[#008200,plain]-^  ClassMetadata                                      
+CachingMetadataReaderFactory                        -[#595959,dashed]->  LocalResourceCache                                 : "«create»"
+CachingMetadataReaderFactory                       "1" *-[#595959,plain]-> "metadataReaderCache\n*" MetadataReader                                     
+CachingMetadataReaderFactory                        -[#000082,plain]-^  SimpleMetadataReaderFactory                        
+CachingMetadataReaderFactoryPostProcessor           -[#008200,dashed]-^  BeanFactoryPostProcessor                           
+CachingMetadataReaderFactoryPostProcessor          "1" *-[#595959,plain]-> "context\n1" ConfigurableApplicationContext                     
+CachingMetadataReaderFactoryPostProcessor           -[#595959,dashed]->  ConfigurationClassPostProcessorCustomizingSupplier : "«create»"
+CachingMetadataReaderFactoryPostProcessor           -[#008200,dashed]-^  PriorityOrdered                                    
+CachingMetadataReaderFactoryPostProcessor           +-[#820000,plain]-  SharedMetadataReaderFactoryContextInitializer      
+ClassPathContextResource                            +-[#820000,plain]-  DefaultResourceLoader                              
+ConfigurableApplicationContext                      -[#008200,plain]-^  ResourceLoader                                     
+ConfigurationClassPostProcessorCustomizingSupplier "1" *-[#595959,plain]-> "context\n1" ConfigurableApplicationContext                     
+ConfigurationClassPostProcessorCustomizingSupplier  +-[#820000,plain]-  SharedMetadataReaderFactoryContextInitializer      
+DefaultResourceLoader                               -[#595959,dashed]->  ClassPathContextResource                           : "«create»"
+DefaultResourceLoader                               -[#008200,dashed]-^  ResourceLoader                                     
+LocalResourceCache                                  +-[#820000,plain]-  CachingMetadataReaderFactory                       
+SharedMetadataReaderFactoryBean                     +-[#820000,plain]-  SharedMetadataReaderFactoryContextInitializer      
+SharedMetadataReaderFactoryContextInitializer       -[#595959,dashed]->  CachingMetadataReaderFactoryPostProcessor          : "«create»"
+SimpleMetadataReaderFactory                         -[#595959,dashed]->  DefaultResourceLoader                              : "«create»"
+SimpleMetadataReaderFactory                         -[#008200,dashed]-^  MetadataReaderFactory                              
+SimpleMetadataReaderFactory                        "1" *-[#595959,plain]-> "resourceLoader\n1" ResourceLoader                                     
+StandardAnnotationMetadata                          -[#008200,dashed]-^  AnnotationMetadata                                 
+StandardAnnotationMetadata                          -[#000082,plain]-^  StandardClassMetadata                              
+StandardClassMetadata                               -[#008200,dashed]-^  ClassMetadata                                      
+@enduml

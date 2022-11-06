@@ -1,0 +1,93 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractAutowireCapableBeanFactory
+class AbstractBeanFactory
+interface AliasRegistry << interface >>
+interface ApplicationStartupAware << interface >>
+interface AttributeAccessor << interface >>
+class AttributeAccessorSupport
+interface AutowireCapableBeanFactory << interface >>
+interface Aware << interface >>
+interface BeanClassLoaderAware << interface >>
+interface BeanDefinition << interface >>
+interface BeanDefinitionRegistry << interface >>
+interface BeanDefinitionRegistryPostProcessor << interface >>
+interface BeanFactory << interface >>
+interface BeanFactoryPostProcessor << interface >>
+class BeanMetadataAttributeAccessor
+interface BeanMetadataElement << interface >>
+class ChildBeanDefinition
+interface Cloneable << interface >>
+interface ConfigurableBeanFactory << interface >>
+interface ConfigurableListableBeanFactory << interface >>
+class ConfigurationClassPostProcessor
+class DefaultListableBeanFactory
+class DefaultResourceLoader
+class DefaultSingletonBeanRegistry
+interface EnvironmentAware << interface >>
+class FactoryBeanRegistrySupport
+interface HierarchicalBeanFactory << interface >>
+interface ListableBeanFactory << interface >>
+interface PriorityOrdered << interface >>
+interface ResourceLoaderAware << interface >>
+class RootBeanDefinition
+interface Serializable << interface >>
+class SimpleAliasRegistry
+interface SingletonBeanRegistry << interface >>
+
+AbstractAutowireCapableBeanFactory   -[#000082,plain]-^  AbstractBeanFactory                 
+AbstractAutowireCapableBeanFactory   -[#008200,dashed]-^  AutowireCapableBeanFactory          
+AbstractAutowireCapableBeanFactory   -[#595959,dashed]->  RootBeanDefinition                  : "«create»"
+AbstractBeanFactory                 "1" *-[#595959,plain]-> "parentBeanFactory\n1" BeanFactory                         
+AbstractBeanFactory                  -[#008200,dashed]-^  ConfigurableBeanFactory             
+AbstractBeanFactory                  -[#000082,plain]-^  FactoryBeanRegistrySupport          
+AbstractBeanFactory                  -[#595959,dashed]->  RootBeanDefinition                  : "«create»"
+AbstractBeanFactory                 "1" *-[#595959,plain]-> "mergedBeanDefinitions\n*" RootBeanDefinition                  
+ApplicationStartupAware              -[#008200,plain]-^  Aware                               
+AttributeAccessorSupport             -[#008200,dashed]-^  AttributeAccessor                   
+AttributeAccessorSupport             -[#008200,dashed]-^  Serializable                        
+AutowireCapableBeanFactory           -[#008200,plain]-^  BeanFactory                         
+BeanClassLoaderAware                 -[#008200,plain]-^  Aware                               
+BeanDefinition                       -[#008200,plain]-^  AttributeAccessor                   
+BeanDefinition                       -[#008200,plain]-^  BeanMetadataElement                 
+BeanDefinitionRegistry               -[#008200,plain]-^  AliasRegistry                       
+BeanDefinitionRegistryPostProcessor  -[#008200,plain]-^  BeanFactoryPostProcessor            
+BeanMetadataAttributeAccessor        -[#000082,plain]-^  AttributeAccessorSupport            
+BeanMetadataAttributeAccessor        -[#008200,dashed]-^  BeanMetadataElement                 
+ChildBeanDefinition                  -[#008200,dashed]-^  BeanDefinition                      
+ChildBeanDefinition                  -[#000082,plain]-^  BeanMetadataAttributeAccessor       
+ChildBeanDefinition                  -[#008200,dashed]-^  Cloneable                           
+ConfigurableBeanFactory              -[#008200,plain]-^  HierarchicalBeanFactory             
+ConfigurableBeanFactory              -[#008200,plain]-^  SingletonBeanRegistry               
+ConfigurableListableBeanFactory      -[#008200,plain]-^  AutowireCapableBeanFactory          
+ConfigurableListableBeanFactory      -[#008200,plain]-^  ConfigurableBeanFactory             
+ConfigurableListableBeanFactory      -[#008200,plain]-^  ListableBeanFactory                 
+ConfigurationClassPostProcessor      -[#008200,dashed]-^  ApplicationStartupAware             
+ConfigurationClassPostProcessor      -[#008200,dashed]-^  BeanClassLoaderAware                
+ConfigurationClassPostProcessor      -[#008200,dashed]-^  BeanDefinitionRegistryPostProcessor 
+ConfigurationClassPostProcessor      -[#595959,dashed]->  DefaultResourceLoader               : "«create»"
+ConfigurationClassPostProcessor      -[#008200,dashed]-^  EnvironmentAware                    
+ConfigurationClassPostProcessor      -[#008200,dashed]-^  PriorityOrdered                     
+ConfigurationClassPostProcessor      -[#008200,dashed]-^  ResourceLoaderAware                 
+DefaultListableBeanFactory           -[#000082,plain]-^  AbstractAutowireCapableBeanFactory  
+DefaultListableBeanFactory          "1" *-[#595959,plain]-> "beanDefinitionMap\n*" BeanDefinition                      
+DefaultListableBeanFactory           -[#008200,dashed]-^  BeanDefinitionRegistry              
+DefaultListableBeanFactory           -[#008200,dashed]-^  ConfigurableListableBeanFactory     
+DefaultListableBeanFactory           -[#595959,dashed]->  RootBeanDefinition                  : "«create»"
+DefaultListableBeanFactory           -[#008200,dashed]-^  Serializable                        
+DefaultSingletonBeanRegistry         -[#000082,plain]-^  SimpleAliasRegistry                 
+DefaultSingletonBeanRegistry         -[#008200,dashed]-^  SingletonBeanRegistry               
+EnvironmentAware                     -[#008200,plain]-^  Aware                               
+FactoryBeanRegistrySupport           -[#000082,plain]-^  DefaultSingletonBeanRegistry        
+HierarchicalBeanFactory              -[#008200,plain]-^  BeanFactory                         
+ListableBeanFactory                  -[#008200,plain]-^  BeanFactory                         
+ResourceLoaderAware                  -[#008200,plain]-^  Aware                               
+RootBeanDefinition                   -[#008200,dashed]-^  BeanDefinition                      
+RootBeanDefinition                   -[#000082,plain]-^  BeanMetadataAttributeAccessor       
+RootBeanDefinition                   -[#008200,dashed]-^  Cloneable                           
+SimpleAliasRegistry                  -[#008200,dashed]-^  AliasRegistry                       
+@enduml
