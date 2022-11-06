@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 
