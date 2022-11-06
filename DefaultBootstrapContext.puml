@@ -1,0 +1,15 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+interface BootstrapContext << interface >>
+interface BootstrapRegistry << interface >>
+interface ConfigurableBootstrapContext << interface >>
+class DefaultBootstrapContext
+
+ConfigurableBootstrapContext  -[#008200,plain]-^  BootstrapContext             
+ConfigurableBootstrapContext  -[#008200,plain]-^  BootstrapRegistry            
+DefaultBootstrapContext       -[#008200,dashed]-^  ConfigurableBootstrapContext 
+@enduml

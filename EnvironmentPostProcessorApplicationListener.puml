@@ -1,0 +1,26 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class ApplicationEvent
+interface ApplicationListener<E> << interface >>
+interface EnvironmentPostProcessor << interface >>
+class EnvironmentPostProcessorApplicationListener
+interface EnvironmentPostProcessorsFactory << interface >>
+interface EventListener << interface >>
+annotation FunctionalInterface << annotation >>
+interface Ordered << interface >>
+interface SmartApplicationListener << interface >>
+
+ApplicationListener                          -[#595959,dashed]->  ApplicationEvent                            
+ApplicationListener                          -[#008200,plain]-^  EventListener                               
+ApplicationListener                          -[#999900,dotted]-  FunctionalInterface                         
+EnvironmentPostProcessor                     -[#999900,dotted]-  FunctionalInterface                         
+EnvironmentPostProcessorApplicationListener  -[#008200,dashed]-^  Ordered                                     
+EnvironmentPostProcessorApplicationListener  -[#008200,dashed]-^  SmartApplicationListener                    
+EnvironmentPostProcessorsFactory             -[#999900,dotted]-  FunctionalInterface                         
+SmartApplicationListener                     -[#008200,plain]-^  ApplicationListener                         
+SmartApplicationListener                     -[#008200,plain]-^  Ordered                                     
+@enduml
